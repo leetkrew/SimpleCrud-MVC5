@@ -1,0 +1,122 @@
+﻿@model SimpleCrud.Web.Models.HomeIndexVM
+
+<p>&nbsp;</p>
+
+<div id="tabs">
+
+    <ul id="tabMenu">
+        <li><a href="#tabs-1">Employees</a></li>
+        <li><a href="#tabs-2">Edit</a></li>
+    </ul>
+
+    <div id="tabs-1">
+
+        <table class="table table-striped" id="employees" width="100%">
+            <thead>
+                <tr>
+                    <th>Employee ID</th>
+                    <th>Full Name</th>
+                    <th>Position</th>
+                    <th>Employee Code</th>
+                    <th>Mobile</th>
+                    <th>&nbsp;</th>
+                </tr>
+            </thead>
+            
+            <tfoot>
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+            </tfoot>
+
+        </table>
+
+
+    </div>
+
+    <div id="tabs-2">
+        <p id="tab2pretext">Please select an employee</p>
+
+
+        @using (Html.BeginForm(null, null, FormMethod.Post, new { id = "frmEdit", @class="hidden" }))
+        {
+            @Html.HiddenFor(x => x.EmployeeID)
+
+
+            <div class="form-horizontal">
+                <div class="row">
+                    <div class="col">
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.FullName, htmlAttributes: new { @class = "control-label col-md-2" })
+                            <div class="col-md-10">
+                                @Html.EditorFor(model => model.FullName, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.FullName, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col">
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.Position, htmlAttributes: new { @class = "control-label col-md-2" })
+                            <div class="col-md-10">
+                                @Html.EditorFor(model => model.Position, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.Position, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col">
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.EmpCode, htmlAttributes: new { @class = "control-label col-md-2" })
+                            <div class="col-md-10">
+                                @Html.EditorFor(model => model.EmpCode, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.EmpCode, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col">
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.Mobile, htmlAttributes: new { @class = "control-label col-md-2" })
+                            <div class="col-md-10">
+                                @Html.EditorFor(model => model.Mobile, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.Mobile, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col">
+                        <div class="form-group">
+                            <div class="col-md-offset-2 col-md-10">
+                                <input id="btn-update" type="submit" value="Update" class="btn btn-primary" />
+                                <input id="btn-delete" type="button" value="Delete" class="btn btn-danger"/>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+
+
+    </div>
+
+
+
+
+</div>
+
+
+
+
+
+
+@Scripts.Render("~/bundles/modules/HomeIndex")

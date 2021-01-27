@@ -1,0 +1,105 @@
+﻿@{
+    var controllerName = ViewContext.RouteData.Values["controller"].ToString();
+    var actionName = ViewContext.RouteData.GetRequiredString("action");
+
+    var urlPath = "";
+    var rootPath = "";
+
+    if (Request.Url.AbsoluteUri.StartsWith("https"))
+    {
+        urlPath = Request.Url.AbsoluteUri.Substring(5);
+        rootPath = Request.Url.GetComponents(UriComponents.SchemeAndServer, UriFormat.UriEscaped).Substring(5);
+    }
+    else
+    {
+        urlPath = Request.Url.AbsoluteUri.Substring(4);
+        rootPath = Request.Url.GetComponents(UriComponents.SchemeAndServer, UriFormat.UriEscaped).Substring(4);
+    }
+
+    if (Request.Url.AbsoluteUri.Contains("localhost"))
+    {
+        urlPath = string.Format("{0}", urlPath.Substring(1));
+        rootPath = string.Format("{0}", rootPath.Substring(1));
+    }
+    else
+    {
+        urlPath = string.Format("https{0}", urlPath);
+        rootPath = string.Format("https{0}", rootPath);
+    }
+
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>Employee Management Demo</title>
+    @Styles.Render("~/Content/css")
+
+    <script lang="javascript">
+        var appPath = '@urlPath';
+        var currentUrlPath = '@Url.Content(string.Format("~/{0}", Request.RawUrl ))';
+        var rootPath = '@Url.Content("~/")';
+    </script>
+
+</head>
+<body>
+    <div class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                @Html.ActionLink("Simple CRUD", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+            </div>
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                    <li>@Html.ActionLink("Manage", "Index", "Home", new { area = "" }, null)</li>
+                    <li>@Html.ActionLink("New Employee", "InsertEmployee", "Home", new { area = "" }, null)</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="container body-content">
+        @RenderBody()
+        <hr />
+
+        <div class="panel panel-default">
+            <div class="panel-heading">Notice and Disclaimer</div>
+            <div class="panel-body">
+                <ul>
+                    <li>Feel free to test this site. You may download the <a href="https://www.github.com/leetkrew" target="_blank">source code</a> if you need to check how it works behind the scenes.</li>
+                    <li>This website is a simple CRUD demonstration of multi-tier architecture that utilizes the following technologies. </li>
+                    <li class="list-unstyled">
+                        <ul>
+                            <li>C# MVC 5</li>
+                            <li>C# Web API</li>
+                            <li>MSSQL Server (Stored Procedures)</li>
+                            <li>Entity Framework 6</li>
+                            <li>jQuery 3.5.1, Ajax, etc.</li>
+                            <li>Sweet Alert 2</li>
+                            <li>Data Tables</li>
+                        </ul>
+                    </li>
+                    <li>Random people generate the content of this site. A fake address <a href="https://www.fakeaddressgenerator.com/" target="_blank">generator</a> generates initial records on this site.</li>
+                    <li>This site is for educational purposes only. This site, including the <a href="https://www.github.com/leetkrew" target="_blank">source code</a>, is provided with an "as is where is" basis without any implied warranty. </li>
+                    <li>All other trademarks and copyrights used to develop this demo site are owned by their respective owners.</li>
+                </ul>
+            </div>
+        </div>
+
+        <footer>
+            <p>&copy; @DateTime.Now.Year - <a href="https://www.rjregalado.com/">Rj Regalado</a></p>
+        </footer>
+    </div>
+
+
+
+    @Scripts.Render("~/bundles/js")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+    <script src="~/Content/datatables/dt.js"></script>
+</body>
+</html>
