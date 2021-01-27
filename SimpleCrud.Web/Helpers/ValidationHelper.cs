@@ -54,7 +54,7 @@ namespace SimpleCrud.Web.Helpers
 
             if (!param.Mobile.StartsWith("09"))
             {
-                ms.AddModelError("Mobile", "Invalid mobile phone number");
+                ms.AddModelError("Mobile", "Mobile phone number must start with 09");
             }
         }
 
@@ -90,7 +90,7 @@ namespace SimpleCrud.Web.Helpers
 
             if (!param.Mobile.StartsWith("09"))
             {
-                ms.AddModelError("Mobile", "Invalid mobile phone number");
+                ms.AddModelError("Mobile", "Mobile phone number must start with 09");
             }
         }
     }
