@@ -33,3 +33,5 @@ bld/
 *.jfm
 /SimpleCrud.SQL/SimpleCrud.SQL.dbmdl
 /SimpleCrud.SQL/Import Schema Logs/SimpleCrud.SQL_20210126033447.log
+/SimpleCrud.API/Properties/PublishProfiles
+/SimpleCrud.Web/Properties/PublishProfiles

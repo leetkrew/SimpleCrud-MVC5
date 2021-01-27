@@ -114,7 +114,8 @@ var HomeIndex = {
                 {
                     text: 'Insert',
                     action: function (e, dt, button, config) {
-                        window.location = './Home/InsertEmployee';
+                        var path = document.location.pathname;
+                        window.location = path + '/Home/InsertEmployee';
                     }
                 }
             ]
@@ -146,7 +147,7 @@ var HomeIndex = {
                     $('#tab2pretext').html('Please select an employee');
                     $('#tab2pretext').addClass('hidden');
                     $('#frmEdit').removeClass('hidden');
-                                        
+
                     $('#EmployeeID').val(r.EmployeeID);
                     $('#FullName').val(r.FullName);
                     $('#Position').val(r.Position);
